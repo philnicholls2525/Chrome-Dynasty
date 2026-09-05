@@ -1,59 +1,106 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <meta name="theme-color" content="#06090d" />
-    <meta name="description" content="APEX Journey — build your football card collection through Drafts, packs and chapter goals." />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    <title>APEX Journey</title>
-    <link rel="manifest" href="./manifest.webmanifest" />
-    <link rel="stylesheet" href="./styles.css" />
-    <script defer src="./app.js"></script>
-  </head>
-  <body>
-    <div class="app-shell">
-      <header class="topbar">
-        <button class="brand" data-view="journey" aria-label="Go to Journey">
-          <span class="brand-mark">A</span>
-          <span><strong>APEX</strong><small>JOURNEY</small></span>
-        </button>
-        <div class="wallet" aria-label="Player resources">
-          <span class="wallet-item"><i class="coin-dot"></i><b id="coin-count">0</b></span>
-          <span class="wallet-item"><i class="pack-dot"></i><b id="pack-count">0</b></span>
-          <button class="icon-btn" id="settings-btn" aria-label="Settings">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z"/><path d="M19.4 15a1.7 1.7 0 0 0 .34 1.88l.06.06-2.83 2.83-.06-.06a1.7 1.7 0 0 0-1.88-.34 1.7 1.7 0 0 0-1.03 1.56V21h-4v-.08A1.7 1.7 0 0 0 8.97 19.4a1.7 1.7 0 0 0-1.88.34l-.06.06-2.83-2.83.06-.06A1.7 1.7 0 0 0 4.6 15a1.7 1.7 0 0 0-1.56-1.03H3v-4h.08A1.7 1.7 0 0 0 4.6 8.94a1.7 1.7 0 0 0-.34-1.88L4.2 7l2.83-2.83.06.06a1.7 1.7 0 0 0 1.88.34A1.7 1.7 0 0 0 10 3.01V3h4v.08a1.7 1.7 0 0 0 1.03 1.56 1.7 1.7 0 0 0 1.88-.34l.06-.06L19.8 7l-.06.06a1.7 1.7 0 0 0-.34 1.88A1.7 1.7 0 0 0 20.96 10H21v4h-.08A1.7 1.7 0 0 0 19.4 15Z"/></svg>
-          </button>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="theme-color" content="#07090f" />
+  <title>APEX v0.35</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <button class="brand" data-route="home" aria-label="APEX home">
+        <span class="brand-a"><span class="window-mark">✦</span>a</span><span>pex</span>
+      </button>
+      <div class="top-actions">
+        <button class="coin-pill" id="coinPill" title="Coins"><span class="coin">◉</span><span id="coinBalance">0</span></button>
+        <button class="profile-dot" data-route="profile" aria-label="Profile">P</button>
+      </div>
+    </header>
+
+    <main id="app"></main>
+
+    <nav class="bottom-nav" aria-label="Main navigation">
+      <button data-route="home" class="nav-item active"><span>⌂</span><small>Home</small></button>
+      <button data-route="collection" class="nav-item"><span>▱</span><small>Collection</small></button>
+      <button data-route="open" class="nav-open"><span class="brand-a mini"><span class="window-mark">✦</span>a</span><small>Open</small></button>
+      <button data-route="objectives" class="nav-item"><span>✧</span><small>Objectives</small><b class="badge" id="objBadge">3</b></button>
+      <button data-route="store" class="nav-item"><span>◫</span><small>Store</small></button>
+    </nav>
+  </div>
+
+  <template id="homeTemplate">
+    <section class="page home-page">
+      <div class="hero-wrap">
+        <div class="hero-track" id="heroTrack">
+          <article class="hero-slide hero-packs">
+            <div class="hero-copy">
+              <p class="eyebrow">APEX UCL DEBUT EDITION 26/27</p>
+              <h1>Open packs.</h1>
+              <p><strong id="heroPackCount">0 packs</strong> and <strong id="heroBoxCount">0 boxes</strong> waiting.</p>
+              <button class="primary" data-route="open">Open now →</button>
+            </div>
+            <div class="pack-art stack-art"><div class="foil pack-1">apex</div><div class="foil pack-2">apex</div><div class="foil pack-3">apex</div></div>
+          </article>
+          <article class="hero-slide hero-set">
+            <div class="hero-copy">
+              <p class="eyebrow">CURRENT RELEASE</p>
+              <h1>Debut Edition</h1>
+              <p>Build the first APEX UCL collection and chase the Only Ones.</p>
+              <button class="primary" data-route="collection">View collection →</button>
+            </div>
+            <img src="assets/base-card-concept.svg" alt="APEX base card concept" class="hero-card-img" />
+          </article>
+          <article class="hero-slide hero-store">
+            <div class="hero-copy">
+              <p class="eyebrow">SEALED PRODUCTS</p>
+              <h1>Save for a Hobby Box.</h1>
+              <p>8 packs. 2 Green+. 1 APEX+. 1 Red+.</p>
+              <button class="primary" data-route="store">Go to store →</button>
+            </div>
+            <div class="hobby-box-art"><span>apex</span><small>DEBUT EDITION<br/>26/27</small><em>SEALED</em></div>
+          </article>
         </div>
-      </header>
+        <div class="hero-dots" id="heroDots"></div>
+      </div>
 
-      <main id="app" aria-live="polite"></main>
+      <section class="tile-grid">
+        <button class="mode-tile tile-draft" data-route="draft">
+          <div><span class="tile-kicker">PLAY</span><h2>Quick Draft</h2><p><b id="draftStars">0</b> Draft Stars</p></div>
+          <span class="tile-art cards-mini"><i></i><i></i><i></i></span>
+        </button>
+        <button class="mode-tile tile-rush" data-route="rush">
+          <div><span class="tile-kicker">10 PACKS</span><h2>Pack Rush</h2><p><b id="perfectRushes">0</b> 4★ Rushes</p></div>
+          <span class="tile-art rush-bolt">↯</span>
+        </button>
+        <button class="mode-tile wide tile-collection" data-route="collection">
+          <div><span class="tile-kicker">BINDER</span><h2>Collection</h2><p><b id="collectionOwned">0</b> owned · <b id="collectionPct">0%</b></p></div>
+          <span class="tile-art binder-art">▱ ▱ ▱</span>
+        </button>
+        <button class="mode-tile tile-sbc" data-route="sbc">
+          <div><span class="tile-kicker">BUILD</span><h2>SBCs</h2><p><b>2</b> ready to complete</p></div>
+          <span class="tile-art sbc-shield">◇</span>
+        </button>
+        <button class="mode-tile tile-store" data-route="store">
+          <div><span class="tile-kicker">SHOP</span><h2>Store</h2><p>Hobby Box · 4,500 ◉</p></div>
+          <span class="tile-art cube">◫</span>
+        </button>
+        <button class="mode-tile tile-objectives" data-route="objectives">
+          <div><span class="tile-kicker">PROGRESS</span><h2>Objectives</h2><p><b>3</b> rewards ready</p></div>
+          <span class="tile-art target">◎</span>
+        </button>
+      </section>
+    </section>
+  </template>
 
-      <nav class="bottom-nav" aria-label="Main navigation">
-        <button data-view="journey" class="active">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19V5l14 7-14 7Z"/></svg><span>Journey</span>
-        </button>
-        <button data-view="draft">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M7 6v12h10V6M9 10h6M9 14h4"/></svg><span>Draft</span>
-        </button>
-        <button data-view="packs">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m4 8 8-4 8 4-8 4-8-4Z"/><path d="m4 8 8 4v8l-8-4V8Zm16 0-8 4v8l8-4V8Z"/></svg><span>Packs</span>
-        </button>
-        <button data-view="binder">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h12a2 2 0 0 1 2 2v14H7a2 2 0 0 1-2-2V4Z"/><path d="M8 4v16M11 8h5"/></svg><span>Binder</span>
-        </button>
-        <button data-view="goals">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/><path d="m15 9 5-5"/></svg><span>Goals</span>
-        </button>
-      </nav>
-    </div>
+  <template id="genericTemplate">
+    <section class="page generic-page">
+      <div class="page-title-row"><div><p class="eyebrow" id="genericEyebrow">APEX</p><h1 id="genericTitle">Screen</h1></div><button class="ghost" data-route="home">← Home</button></div>
+      <div id="genericContent"></div>
+    </section>
+  </template>
 
-    <dialog id="settings-dialog" class="sheet-dialog">
-      <div class="dialog-head"><div><span class="eyebrow">SAVE DATA</span><h2>Settings</h2></div><button class="icon-btn" id="close-settings" aria-label="Close">×</button></div>
-      <p>Your collection and Journey progress are saved on this device.</p>
-      <button class="btn btn-danger btn-full" id="reset-progress">Start a brand-new save</button>
-    </dialog>
-    <div class="toast" id="toast" role="status"></div>
-  </body>
+  <script src="app.js"></script>
+</body>
 </html>
